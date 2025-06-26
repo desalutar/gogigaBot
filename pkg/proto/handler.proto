@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+option go_package = "pkg/gen/handlers";
+
+package handlers;
+
+// Модель запроса от клиента
+message AskRequest {
+    string question = 1;  // Вопрос от пользователя
+}
+
+// Модель ответа от сервиса
+message AskResponse {
+    string answer = 1;    // Ответ на вопрос
+}
+
+// RPC-интерфейс для Question Answering
+service QAService {
+    rpc Ask(AskRequest) returns (AskResponse);  // Метод для обработки команды /ask
+}

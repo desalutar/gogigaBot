@@ -1,3 +1,3 @@
-module R2D2/apps/handlers
+module gogigaBot/apps/handlers
 
 go 1.24.1

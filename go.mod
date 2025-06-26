@@ -1,3 +1,3 @@
-module R2D2
+module gogigaBot
 
 go 1.24.1
