@@ -2,9 +2,9 @@
 // versions:
 // 	protoc-gen-go v1.36.6
 // 	protoc        v5.29.3
-// source: handler.proto
+// source: tgHandlers.proto
 
-package handlers
+package tgHandlers
 
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
@@ -31,7 +31,7 @@ type AskRequest struct {
 
 func (x *AskRequest) Reset() {
 	*x = AskRequest{}
-	mi := &file_handler_proto_msgTypes[0]
+	mi := &file_tgHandlers_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -43,7 +43,7 @@ func (x *AskRequest) String() string {
 func (*AskRequest) ProtoMessage() {}
 
 func (x *AskRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_handler_proto_msgTypes[0]
+	mi := &file_tgHandlers_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -56,7 +56,7 @@ func (x *AskRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AskRequest.ProtoReflect.Descriptor instead.
 func (*AskRequest) Descriptor() ([]byte, []int) {
-	return file_handler_proto_rawDescGZIP(), []int{0}
+	return file_tgHandlers_proto_rawDescGZIP(), []int{0}
 }
 
 func (x *AskRequest) GetQuestion() string {
@@ -76,7 +76,7 @@ type AskResponse struct {
 
 func (x *AskResponse) Reset() {
 	*x = AskResponse{}
-	mi := &file_handler_proto_msgTypes[1]
+	mi := &file_tgHandlers_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -88,7 +88,7 @@ func (x *AskResponse) String() string {
 func (*AskResponse) ProtoMessage() {}
 
 func (x *AskResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_handler_proto_msgTypes[1]
+	mi := &file_tgHandlers_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -101,7 +101,7 @@ func (x *AskResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AskResponse.ProtoReflect.Descriptor instead.
 func (*AskResponse) Descriptor() ([]byte, []int) {
-	return file_handler_proto_rawDescGZIP(), []int{1}
+	return file_tgHandlers_proto_rawDescGZIP(), []int{1}
 }
 
 func (x *AskResponse) GetAnswer() string {
@@ -111,39 +111,40 @@ func (x *AskResponse) GetAnswer() string {
 	return ""
 }
 
-var File_handler_proto protoreflect.FileDescriptor
+var File_tgHandlers_proto protoreflect.FileDescriptor
 
-const file_handler_proto_rawDesc = "" +
+const file_tgHandlers_proto_rawDesc = "" +
 	"\n" +
-	"\rhandler.proto\x12\bhandlers\"(\n" +
+	"\x10tgHandlers.proto\x12\n" +
+	"tgHandlers\"(\n" +
 	"\n" +
 	"AskRequest\x12\x1a\n" +
 	"\bquestion\x18\x01 \x01(\tR\bquestion\"%\n" +
 	"\vAskResponse\x12\x16\n" +
-	"\x06answer\x18\x01 \x01(\tR\x06answer2?\n" +
-	"\tQAService\x122\n" +
-	"\x03Ask\x12\x14.handlers.AskRequest\x1a\x15.handlers.AskResponseB\x12Z\x10pkg/gen/handlersb\x06proto3"
+	"\x06answer\x18\x01 \x01(\tR\x06answer2C\n" +
+	"\tQAService\x126\n" +
+	"\x03Ask\x12\x16.tgHandlers.AskRequest\x1a\x17.tgHandlers.AskResponseB\x14Z\x12pkg/gen/tgHandlersb\x06proto3"
 
 var (
-	file_handler_proto_rawDescOnce sync.Once
-	file_handler_proto_rawDescData []byte
+	file_tgHandlers_proto_rawDescOnce sync.Once
+	file_tgHandlers_proto_rawDescData []byte
 )
 
-func file_handler_proto_rawDescGZIP() []byte {
-	file_handler_proto_rawDescOnce.Do(func() {
-		file_handler_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_handler_proto_rawDesc), len(file_handler_proto_rawDesc)))
+func file_tgHandlers_proto_rawDescGZIP() []byte {
+	file_tgHandlers_proto_rawDescOnce.Do(func() {
+		file_tgHandlers_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_tgHandlers_proto_rawDesc), len(file_tgHandlers_proto_rawDesc)))
 	})
-	return file_handler_proto_rawDescData
+	return file_tgHandlers_proto_rawDescData
 }
 
-var file_handler_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
-var file_handler_proto_goTypes = []any{
-	(*AskRequest)(nil),  // 0: handlers.AskRequest
-	(*AskResponse)(nil), // 1: handlers.AskResponse
+var file_tgHandlers_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
+var file_tgHandlers_proto_goTypes = []any{
+	(*AskRequest)(nil),  // 0: tgHandlers.AskRequest
+	(*AskResponse)(nil), // 1: tgHandlers.AskResponse
 }
-var file_handler_proto_depIdxs = []int32{
-	0, // 0: handlers.QAService.Ask:input_type -> handlers.AskRequest
-	1, // 1: handlers.QAService.Ask:output_type -> handlers.AskResponse
+var file_tgHandlers_proto_depIdxs = []int32{
+	0, // 0: tgHandlers.QAService.Ask:input_type -> tgHandlers.AskRequest
+	1, // 1: tgHandlers.QAService.Ask:output_type -> tgHandlers.AskResponse
 	1, // [1:2] is the sub-list for method output_type
 	0, // [0:1] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
@@ -151,26 +152,26 @@ var file_handler_proto_depIdxs = []int32{
 	0, // [0:0] is the sub-list for field type_name
 }
 
-func init() { file_handler_proto_init() }
-func file_handler_proto_init() {
-	if File_handler_proto != nil {
+func init() { file_tgHandlers_proto_init() }
+func file_tgHandlers_proto_init() {
+	if File_tgHandlers_proto != nil {
 		return
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
-			RawDescriptor: unsafe.Slice(unsafe.StringData(file_handler_proto_rawDesc), len(file_handler_proto_rawDesc)),
+			RawDescriptor: unsafe.Slice(unsafe.StringData(file_tgHandlers_proto_rawDesc), len(file_tgHandlers_proto_rawDesc)),
 			NumEnums:      0,
 			NumMessages:   2,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
-		GoTypes:           file_handler_proto_goTypes,
-		DependencyIndexes: file_handler_proto_depIdxs,
-		MessageInfos:      file_handler_proto_msgTypes,
+		GoTypes:           file_tgHandlers_proto_goTypes,
+		DependencyIndexes: file_tgHandlers_proto_depIdxs,
+		MessageInfos:      file_tgHandlers_proto_msgTypes,
 	}.Build()
-	File_handler_proto = out.File
-	file_handler_proto_goTypes = nil
-	file_handler_proto_depIdxs = nil
+	File_tgHandlers_proto = out.File
+	file_tgHandlers_proto_goTypes = nil
+	file_tgHandlers_proto_depIdxs = nil
 }

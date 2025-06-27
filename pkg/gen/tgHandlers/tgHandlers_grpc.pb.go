@@ -2,9 +2,9 @@
 // versions:
 // - protoc-gen-go-grpc v1.5.1
 // - protoc             v5.29.3
-// source: handler.proto
+// source: tgHandlers.proto
 
-package handlers
+package tgHandlers
 
 import (
 	context "context"
@@ -19,7 +19,7 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	QAService_Ask_FullMethodName = "/handlers.QAService/Ask"
+	QAService_Ask_FullMethodName = "/tgHandlers.QAService/Ask"
 )
 
 // QAServiceClient is the client API for QAService service.
@@ -112,7 +112,7 @@ func _QAService_Ask_Handler(srv interface{}, ctx context.Context, dec func(inter
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var QAService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "handlers.QAService",
+	ServiceName: "tgHandlers.QAService",
 	HandlerType: (*QAServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -121,5 +121,5 @@ var QAService_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "handler.proto",
+	Metadata: "tgHandlers.proto",
 }

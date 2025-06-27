@@ -2,7 +2,7 @@ package main
 
 import (
 	// "fmt"
-	"gptBot/apps/handlers/internal/server"
+	"gptBot/apps/tgHandlers/internal/server"
 )
 
 func main() {

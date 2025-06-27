@@ -1,8 +1,8 @@
 package server
 
 import (
-	"gptBot/apps/handlers/internal/controller"
-	pb "gptBot/pkg/gen/handlers"
+	"gptBot/apps/tgHandlers/internal/controller"
+	pb "gptBot/pkg/gen/tgHandlers"
 	"log"
 	"net"
 

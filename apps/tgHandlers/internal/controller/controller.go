@@ -2,7 +2,7 @@ package controller
 
 import (
 	"context"
-	pb "gptBot/pkg/gen/handlers"
+	pb "gptBot/pkg/gen/tgHandlers"
 	"log"
 )
 
