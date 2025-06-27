@@ -1,8 +1,8 @@
 package server
 
 import (
-	"gogigaBot/apps/handlers/internal/controller"
-	pb "gogigaBot/pkg/gen/handlers"
+	"gptBot/apps/handlers/internal/controller"
+	pb "gptBot/pkg/gen/handlers"
 	"log"
 	"net"
 

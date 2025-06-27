@@ -1,4 +1,4 @@
-module gogigaBot/pkg
+module gptBot/pkg
 
 go 1.24.1
 
