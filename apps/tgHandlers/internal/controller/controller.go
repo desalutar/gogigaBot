@@ -16,7 +16,7 @@ type Handlerer interface {
 	Ask(ctx context.Context, req *pb.AskRequest) (*pb.AskResponse, error)
 }
 
-func NewController(log logger.Logger) *Handler {
+func NewController(ctx context.Context, log logger.Logger) *Handler {
 	return &Handler{log: log}
 }
 

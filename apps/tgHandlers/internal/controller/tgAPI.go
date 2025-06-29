@@ -11,7 +11,7 @@ import (
 	"google.golang.org/grpc/credentials/insecure"
 )
 
-func StartTelegramBot(log logger.Logger) {
+func StartTelegramBot(ctx context.Context, log logger.Logger) {
 	bot, err := tgbot.NewBotAPI(os.Getenv("TG_TOKEN"))
 	if err != nil {
 		panic(err)
@@ -25,30 +25,36 @@ func StartTelegramBot(log logger.Logger) {
 
 	conn, err := grpc.NewClient("localhost:50051", grpc.WithTransportCredentials(insecure.NewCredentials()))
 	if err != nil {
-		log.Error("Не удалось подключиться к gRPC: %v", logger.Field{Key: "error", Value: err})
+		log.Error("Не удалось подключиться к gRPC", logger.Field{Key: "error", Value: err})
+		return
 	}
 	defer conn.Close()
 
 	client := pb.NewQAServiceClient(conn)
 
-	for update := range updates {
-		if update.Message == nil {
-			continue
-		}
-
-		if update.Message.IsCommand() && update.Message.Command() == "ask" {
-			text := strings.TrimSpace(update.Message.CommandArguments())
-			resp, err := client.Ask(context.Background(), &pb.AskRequest{Question: text})
-			if err != nil {
-				bot.Send(tgbot.NewMessage(update.Message.Chat.ID, "Ошибка gRPC"))
+	for {
+		select {
+		case <-ctx.Done():
+			log.Info("Shutdown signal received, stopping Telegram bot")
+			return
+		case update := <-updates:
+			if update.Message == nil {
 				continue
 			}
-			bot.Send(tgbot.NewMessage(update.Message.Chat.ID, resp.Answer))
-		} else {
-			// Просто повторяем сообщение
-			msg := tgbot.NewMessage(update.Message.Chat.ID, update.Message.Text)
-			msg.ReplyToMessageID = update.Message.MessageID
-			bot.Send(msg)
+
+			if update.Message.IsCommand() && update.Message.Command() == "ask" {
+				text := strings.TrimSpace(update.Message.CommandArguments())
+				resp, err := client.Ask(context.Background(), &pb.AskRequest{Question: text})
+				if err != nil {
+					bot.Send(tgbot.NewMessage(update.Message.Chat.ID, "Ошибка gRPC"))
+					continue
+				}
+				bot.Send(tgbot.NewMessage(update.Message.Chat.ID, resp.Answer))
+			} else {
+				msg := tgbot.NewMessage(update.Message.Chat.ID, update.Message.Text)
+				msg.ReplyToMessageID = update.Message.MessageID
+				bot.Send(msg)
+			}
 		}
 	}
 }
