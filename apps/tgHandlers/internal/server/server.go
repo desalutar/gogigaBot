@@ -17,7 +17,7 @@ func StartServer(ctx context.Context, log logger.Logger) {
 		log.Error("error started: %v", logger.Field{Key: "error", Value: err})
 	}
 
-	serverController := controller.NewController(ctx, log)
+	serverController := controller.NewController(ctx)
 	s := grpc.NewServer()
 	pb.RegisterQAServiceServer(s, serverController)
 	reflection.Register(s)

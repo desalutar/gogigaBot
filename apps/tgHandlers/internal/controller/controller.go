@@ -3,21 +3,19 @@ package controller
 import (
 	"context"
 	pb "gptBot/pkg/gen/tgHandlers"
-	"gptBot/pkg/logger"
 	"log"
 )
 
 type Handler struct {
 	pb.UnimplementedQAServiceServer
-	log logger.Logger
 }
 
 type Handlerer interface {
 	Ask(ctx context.Context, req *pb.AskRequest) (*pb.AskResponse, error)
 }
 
-func NewController(ctx context.Context, log logger.Logger) *Handler {
-	return &Handler{log: log}
+func NewController(ctx context.Context) *Handler {
+	return &Handler{}
 }
 
 func (h *Handler) Ask(ctx context.Context, req *pb.AskRequest) (*pb.AskResponse, error) {
