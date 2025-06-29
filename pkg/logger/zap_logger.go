@@ -1,6 +1,8 @@
 package logger
 
 import (
+	"gptBot/pkg/config"
+
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
 )
@@ -9,7 +11,7 @@ type ZapLogger struct {
 	log *zap.Logger
 }
 
-func NewLogger(cfg Config) (*ZapLogger, error) {
+func NewLogger(cfg config.LoggerConfig) (*ZapLogger, error) {
 	var zapCfg zap.Config
 	if cfg.Environment == "production" {
 		zapCfg = zap.NewProductionConfig()

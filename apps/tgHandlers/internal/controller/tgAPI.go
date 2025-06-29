@@ -3,23 +3,15 @@ package controller
 import (
 	"context"
 	pb "gptBot/pkg/gen/tgHandlers"
-	"log"
+	"gptBot/pkg/logger"
 	"os"
 	"strings"
-
 	tgbot "github.com/go-telegram-bot-api/telegram-bot-api/v5"
-	"github.com/joho/godotenv"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
 )
 
-func init() {
-	if err := godotenv.Load(); err != nil {
-		log.Println("Файл .env не найден, продолжаем без него")
-	}
-}
-
-func StartTelegramBot() {
+func StartTelegramBot(log logger.Logger) {
 	bot, err := tgbot.NewBotAPI(os.Getenv("TG_TOKEN"))
 	if err != nil {
 		panic(err)
@@ -33,7 +25,7 @@ func StartTelegramBot() {
 
 	conn, err := grpc.NewClient("localhost:50051", grpc.WithTransportCredentials(insecure.NewCredentials()))
 	if err != nil {
-		log.Fatalf("Не удалось подключиться к gRPC: %v", err)
+		log.Error("Не удалось подключиться к gRPC: %v", logger.Field{Key: "error", Value: err})
 	}
 	defer conn.Close()
 

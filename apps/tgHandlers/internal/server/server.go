@@ -3,26 +3,26 @@ package server
 import (
 	"gptBot/apps/tgHandlers/internal/controller"
 	pb "gptBot/pkg/gen/tgHandlers"
-	"log"
+	"gptBot/pkg/logger"
 	"net"
 
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"
 )
 
-func StartServer() {
+func StartServer(log logger.Logger) {
 	lis, err := net.Listen("tcp", ":50051")
 	if err != nil {
-		log.Fatalf("error started: %v", err)
+		log.Error("error started: %v", logger.Field{Key: "error", Value: err})
 	}
-	serverController := controller.NewController()
+	serverController := controller.NewController(log)
 	s := grpc.NewServer()
 	pb.RegisterQAServiceServer(s, serverController)
 	
 	reflection.Register(s)
 
-	log.Println("Server started port :50051")
+	log.Info("Server started", logger.Field{Key: "port", Value: 50051})
 	if err := s.Serve(lis); err != nil {
-		log.Fatalf("Error server %v", err)
+		log.Error("Error server %v", logger.Field{Key: "error", Value: err})
 	}
 }
