@@ -17,7 +17,7 @@ func StartTelegramBot(ctx context.Context, log logger.Logger) {
 		panic(err)
 	}
 
-	bot.Debug = true
+	bot.Debug = false
 
 	updateConfig := tgbot.NewUpdate(0)
 	updateConfig.Timeout = 30
