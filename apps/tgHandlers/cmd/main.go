@@ -29,7 +29,14 @@ func main() {
 		log.Fatalf("error create logger")
 	}
 
-	go controller.StartTelegramBot(ctx, logger)
+	bot, err := controller.NewTelegramBot(ctx, logger)
+	if err != nil {
+		log.Fatal("Telegram bot init error")
+	}
+	defer bot.Close()
+
+	go bot.Run()
+
 	server.StartServer(ctx, logger)
 
 	<-ctx.Done()
