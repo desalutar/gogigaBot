@@ -21,6 +21,9 @@ func NewLogger(cfg config.LoggerConfig) (*ZapLogger, error) {
 
 	zapCfg.Level = zap.NewAtomicLevelAt(parseLevel(cfg.Level))
 
+	zapCfg.EncoderConfig.TimeKey = ""
+	zapCfg.EncoderConfig.CallerKey = ""
+
 	z, err := zapCfg.Build()
 	if err != nil {
 		return nil, err
@@ -28,6 +31,7 @@ func NewLogger(cfg config.LoggerConfig) (*ZapLogger, error) {
 
 	return &ZapLogger{log: z}, nil
 }
+
 
 func (l *ZapLogger) Info(msg string, fields ...Field) {
 	l.log.Info(msg, convertFields(fields)...)
