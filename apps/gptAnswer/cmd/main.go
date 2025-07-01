@@ -1,9 +1,9 @@
 package main
 
 import (
+	// "R2D2/apps/gptAnswer/controller"
+	"R2D2/apps/gptAnswer/internal/server"
 	"context"
-	"gptBot/apps/tgHandlers/internal/controller"
-	"gptBot/apps/tgHandlers/internal/server"
 	"gptBot/pkg/config"
 	"gptBot/pkg/logger"
 	"log"
@@ -28,14 +28,6 @@ func main() {
 	if err != nil {
 		log.Fatalf("error create logger")
 	}
-
-	bot, err := controller.NewTelegramBot(ctx, logger)
-	if err != nil {
-		log.Fatal("Telegram bot init error")
-	}
-	defer bot.Close()
-
-	go bot.Run()
 
 	server.StartServer(ctx, logger)
 

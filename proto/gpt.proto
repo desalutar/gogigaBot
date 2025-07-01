@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+option go_package = "pkg/gen/gpt";
+
+package gpt;
+
+// Запрос с вопросом пользователя
+message AskRequest {
+    string question = 1;
+}
+
+// Ответ с текстом ответа GPT
+message AskResponse {
+    string answer = 1;
+}
+
+// Сервис для обработки вопросов
+service QAService {
+    rpc Ask(AskRequest) returns (AskResponse);
+}
