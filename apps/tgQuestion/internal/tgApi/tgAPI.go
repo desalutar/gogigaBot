@@ -1,16 +1,14 @@
 package controller
 
 import (
-	"context"
 	"os"
+	"context"
 	"strings"
-
-	pb "gptBot/pkg/gen/tgHandlers"
 	"gptBot/pkg/logger"
-
-	tgbot "github.com/go-telegram-bot-api/telegram-bot-api/v5"
 	"google.golang.org/grpc"
+	pb "gptBot/pkg/gen/tgHandlers"
 	"google.golang.org/grpc/credentials/insecure"
+	tgbot "github.com/go-telegram-bot-api/telegram-bot-api/v5"
 )
 
 type TelegramBot struct {
