@@ -1,7 +1,8 @@
 package server
 
 import (
-	"R2D2/apps/gptAnswer/controller"
+	"R2D2/apps/gptAnswer/internal/controller"
+	"R2D2/apps/gptAnswer/internal/gptApi"
 	"context"
 	pb "gptBot/pkg/gen/gpt"
 	"gptBot/pkg/logger"
@@ -18,7 +19,10 @@ func StartServer(ctx context.Context, log logger.Logger) {
 		log.Error("error started: %v", logger.Field{Key: "error", Value: err})
 	}
 
-	serverController := controller.NewController(ctx)
+	client := gptApi.NewClient()
+
+	serverController := controller.NewController(ctx, client)
+	
 	s := grpc.NewServer()
 	pb.RegisterQAServiceServer(s, serverController)
 	reflection.Register(s)

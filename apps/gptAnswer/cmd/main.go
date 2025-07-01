@@ -2,7 +2,7 @@ package main
 
 import (
 	// "R2D2/apps/gptAnswer/controller"
-	"R2D2/apps/gptAnswer/server"
+	"R2D2/apps/gptAnswer/internal/server"
 	"context"
 	"gptBot/pkg/config"
 	"gptBot/pkg/logger"
