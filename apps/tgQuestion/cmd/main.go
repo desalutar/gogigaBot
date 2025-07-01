@@ -2,8 +2,8 @@ package main
 
 import (
 	"context"
-	"gptBot/apps/tgHandlers/internal/controller"
-	"gptBot/apps/tgHandlers/internal/server"
+	"gptBot/apps/tgQuestion/internal/controller"
+	"gptBot/apps/tgQuestion/internal/server"
 	"gptBot/pkg/config"
 	"gptBot/pkg/logger"
 	"log"

@@ -1,4 +1,4 @@
-module gptBot/apps/tgHandlers
+module gptBot/apps/tgQuestion
 
 go 1.24.1
 
