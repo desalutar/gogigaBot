@@ -3,11 +3,13 @@ package server
 import (
 	"context"
 	"gptBot/apps/tgQuestion/internal/controller"
+	"gptBot/pkg/gen/gpt"
 	pb "gptBot/pkg/gen/tgHandlers"
 	"gptBot/pkg/logger"
 	"net"
 
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/credentials/insecure"
 	"google.golang.org/grpc/reflection"
 )
 
@@ -17,7 +19,15 @@ func StartServer(ctx context.Context, log logger.Logger) {
 		log.Error("error started: %v", logger.Field{Key: "error", Value: err})
 	}
 
-	serverController := controller.NewController(ctx)
+	conn, err := grpc.NewClient("localhost:50052", grpc.WithTransportCredentials(insecure.NewCredentials()))
+	if err != nil {
+		log.Error("не удалось подключиться к gpt-сервису: %v", logger.Field{Key: "Error", Value: err})
+	}
+	defer conn.Close()
+
+	gptClient :=gpt.NewQAServiceClient(conn)
+
+	serverController := controller.NewController(ctx, gptClient, log)
 	s := grpc.NewServer()
 	pb.RegisterQAServiceServer(s, serverController)
 	reflection.Register(s)

@@ -7,7 +7,6 @@ import (
 	pb "gptBot/pkg/gen/gpt"
 	"gptBot/pkg/logger"
 	"net"
-
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"
 )
@@ -21,7 +20,7 @@ func StartServer(ctx context.Context, log logger.Logger) {
 
 	client := gptApi.NewClient()
 
-	serverController := controller.NewController(ctx, client)
+	serverController := controller.NewController(ctx, client, log)
 	
 	s := grpc.NewServer()
 	pb.RegisterQAServiceServer(s, serverController)
