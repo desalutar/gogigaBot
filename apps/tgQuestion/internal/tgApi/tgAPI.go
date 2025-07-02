@@ -66,57 +66,41 @@ func (t *TelegramBot) handleUpdate(update tgbot.Update) {
 		return
 	}
 
-	text := update.Message.Text
-
-	// Проверяем, начинается ли сообщение с @botUsername (например, "@my_bot ")
-	if strings.HasPrefix(text, "@"+t.bot.Self.UserName) {
-		// Убираем упоминание из текста, чтобы получить вопрос
-		question := strings.TrimSpace(strings.TrimPrefix(text, "@"+t.bot.Self.UserName))
-
-		if question == "" {
-			// Если вопрос пустой, можно проигнорировать или ответить "Задайте вопрос"
-			return
-		}
-
-		t.handleAsk(update, question)
+	if !t.isBotMentioned(update.Message) {
 		return
 	}
 
-	// Если это команда /ask - если хотите оставить поддержку команд
-	if update.Message.IsCommand() && update.Message.Command() == "ask" {
-		question := strings.TrimSpace(update.Message.CommandArguments())
-		t.handleAsk(update, question)
+	question := strings.Replace(update.Message.Text, "@"+t.bot.Self.UserName, "", 1)
+	question = strings.TrimSpace(question)
+	if question == "" {
 		return
 	}
 
-	// В остальных случаях просто эхо
-	t.echoMessage(update)
+	t.handleAsk(update, question)
 }
 
-// func (t *TelegramBot) handleAskCommand(update tgbot.Update) {
-// 	text := strings.TrimSpace(update.Message.CommandArguments())
-// 	resp, err := t.client.Ask(context.Background(), &pb.AskRequest{Question: text})
-// 	if err != nil {
-// 		t.bot.Send(tgbot.NewMessage(update.Message.Chat.ID, "Ошибка gRPC"))
-// 		return
-// 	}
-// 	t.bot.Send(tgbot.NewMessage(update.Message.Chat.ID, resp.Answer))
-// }
+
+func (t *TelegramBot) isBotMentioned(message *tgbot.Message) bool {
+	for _, entity := range message.Entities {
+		if entity.Type == "mention" {
+			mention := message.Text[entity.Offset : entity.Offset+entity.Length]
+			if mention == "@"+t.bot.Self.UserName {
+				return true
+			}
+		}
+	}
+	return false
+}
 
 func (t *TelegramBot) handleAsk(update tgbot.Update, question string) {
-	resp, err := t.client.Ask(context.Background(), &pb.AskRequest{Question: question})
+	resp, err := t.client.Ask(t.ctx, &pb.AskRequest{Question: question})
 	if err != nil {
-		t.bot.Send(tgbot.NewMessage(update.Message.Chat.ID, "Ошибка gRPC"))
-		return
-	}
+        t.log.Error("gRPC Ask failed", logger.Field{Key: "error", Value: err})
+        t.bot.Send(tgbot.NewMessage(update.Message.Chat.ID, "Ошибка gRPC: "+err.Error()))
+        return
+    }
 
 	msg := tgbot.NewMessage(update.Message.Chat.ID, resp.Answer)
-	msg.ReplyToMessageID = update.Message.MessageID
-	t.bot.Send(msg)
-}
-
-func (t *TelegramBot) echoMessage(update tgbot.Update) {
-	msg := tgbot.NewMessage(update.Message.Chat.ID, update.Message.Text)
 	msg.ReplyToMessageID = update.Message.MessageID
 	t.bot.Send(msg)
 }
