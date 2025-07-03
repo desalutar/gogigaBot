@@ -1,0 +1,24 @@
+services:
+  tg:
+    build:
+      context: .
+      dockerfile: apps/tgQuestion/Dockerfile
+    ports:
+      - "50051:50051"
+    env_file:
+      - .env
+    volumes:
+      - .env:/root/.env
+    depends_on:
+      - gpt
+
+  gpt:
+    build:
+      context: .
+      dockerfile: apps/gptAnswer/Dockerfile
+    ports:
+      - "50052:50052"
+    env_file:
+      - .env
+    volumes:
+      - .env:/root/.env

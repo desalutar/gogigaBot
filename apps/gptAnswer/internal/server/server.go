@@ -11,7 +11,7 @@ import (
 	"google.golang.org/grpc/reflection"
 )
 
-
+// TODO: ДОПИСАТЬ GATEWAY
 func StartServer(ctx context.Context, log logger.Logger) {
 	lis, err := net.Listen("tcp", ":50052")
 	if err != nil {

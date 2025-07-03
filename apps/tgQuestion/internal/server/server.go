@@ -19,7 +19,7 @@ func StartServer(ctx context.Context, log logger.Logger) {
 		log.Error("error started: %v", logger.Field{Key: "error", Value: err})
 	}
 
-	conn, err := grpc.NewClient("localhost:50052", grpc.WithTransportCredentials(insecure.NewCredentials()))
+	conn, err := grpc.NewClient("gpt:50052", grpc.WithTransportCredentials(insecure.NewCredentials()))
 	if err != nil {
 		log.Error("не удалось подключиться к gpt-сервису: %v", logger.Field{Key: "Error", Value: err})
 	}
