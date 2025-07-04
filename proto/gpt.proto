@@ -3,6 +3,8 @@ syntax = "proto3";
 option go_package = "pkg/gen/gpt";
 
 package gpt;
+import "google/api/annotations.proto";
+
 
 // Запрос с вопросом пользователя
 message AskRequest {
@@ -16,5 +18,10 @@ message AskResponse {
 
 // Сервис для обработки вопросов
 service QAService {
-    rpc Ask(AskRequest) returns (AskResponse);
+    rpc Ask(AskRequest) returns (AskResponse) {
+        option (google.api.http) = {
+            post: "/ask"
+            body: "*"
+        };
+    }
 }

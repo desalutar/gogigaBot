@@ -1,8 +1,8 @@
 services:
-  tg:
+  tg-service:
     build:
       context: .
-      dockerfile: apps/tgQuestion/Dockerfile
+      dockerfile: apps/tg-service/Dockerfile
     ports:
       - "50051:50051"
     env_file:
@@ -10,15 +10,22 @@ services:
     volumes:
       - .env:/root/.env
     depends_on:
-      - gpt
-
-  gpt:
+      - gpt-service
+  gpt-service:
     build:
       context: .
-      dockerfile: apps/gptAnswer/Dockerfile
+      dockerfile: apps/gpt-service/Dockerfile
     ports:
       - "50052:50052"
     env_file:
       - .env
     volumes:
       - .env:/root/.env
+  gateway-service:
+    build:
+      context: .
+      dockerfile: apps/gateway-service/Dockerfile
+    ports:
+      - "8080:8080"
+    depends_on:
+      - gpt-service

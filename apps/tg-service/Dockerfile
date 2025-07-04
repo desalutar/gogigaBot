@@ -4,13 +4,13 @@ WORKDIR /app
 
 COPY go.mod go.sum ./
 COPY pkg/go.mod pkg/go.sum ./pkg/
-COPY apps/tgQuestion/go.mod apps/tgQuestion/go.sum ./apps/tgQuestion/
+COPY apps/tg-service/go.mod apps/tg-service/go.sum ./apps/tg-service/
 
 RUN go mod download
 
 COPY . .
 
-WORKDIR /app/apps/tgQuestion
+WORKDIR /app/apps/tg-service
 RUN go build -o /app/tg-service ./cmd/main.go
 
 FROM alpine:latest

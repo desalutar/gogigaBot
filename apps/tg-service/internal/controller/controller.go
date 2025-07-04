@@ -2,8 +2,8 @@ package controller
 
 import (
 	"context"
-	gpt "gptBot/pkg/gen/gpt"
-	pb "gptBot/pkg/gen/tgHandlers"
+	gpt "gptBot/pkg/gen/gpt-service"
+	pb "gptBot/pkg/gen/tg-service"
 	"gptBot/pkg/logger"
 )
 

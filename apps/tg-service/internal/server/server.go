@@ -3,8 +3,8 @@ package server
 import (
 	"context"
 	"gptBot/apps/tgQuestion/internal/controller"
-	"gptBot/pkg/gen/gpt"
-	pb "gptBot/pkg/gen/tgHandlers"
+	"gptBot/pkg/gen/gpt-service"
+	pb "gptBot/pkg/gen/tg-service"
 	"gptBot/pkg/logger"
 	"net"
 

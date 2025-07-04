@@ -3,7 +3,7 @@ package controller
 import (
 	"R2D2/apps/gptAnswer/internal/gptApi"
 	"context"
-	pb "gptBot/pkg/gen/gpt"
+	pb "gptBot/pkg/gen/gpt-service"
 	"gptBot/pkg/logger"
 )
 

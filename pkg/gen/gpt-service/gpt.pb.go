@@ -2,11 +2,12 @@
 // versions:
 // 	protoc-gen-go v1.36.6
 // 	protoc        v5.29.3
-// source: gpt.proto
+// source: proto/gpt.proto
 
 package gpt
 
 import (
+	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -31,7 +32,7 @@ type AskRequest struct {
 
 func (x *AskRequest) Reset() {
 	*x = AskRequest{}
-	mi := &file_gpt_proto_msgTypes[0]
+	mi := &file_proto_gpt_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -43,7 +44,7 @@ func (x *AskRequest) String() string {
 func (*AskRequest) ProtoMessage() {}
 
 func (x *AskRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_gpt_proto_msgTypes[0]
+	mi := &file_proto_gpt_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -56,7 +57,7 @@ func (x *AskRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AskRequest.ProtoReflect.Descriptor instead.
 func (*AskRequest) Descriptor() ([]byte, []int) {
-	return file_gpt_proto_rawDescGZIP(), []int{0}
+	return file_proto_gpt_proto_rawDescGZIP(), []int{0}
 }
 
 func (x *AskRequest) GetQuestion() string {
@@ -76,7 +77,7 @@ type AskResponse struct {
 
 func (x *AskResponse) Reset() {
 	*x = AskResponse{}
-	mi := &file_gpt_proto_msgTypes[1]
+	mi := &file_proto_gpt_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -88,7 +89,7 @@ func (x *AskResponse) String() string {
 func (*AskResponse) ProtoMessage() {}
 
 func (x *AskResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_gpt_proto_msgTypes[1]
+	mi := &file_proto_gpt_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -101,7 +102,7 @@ func (x *AskResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AskResponse.ProtoReflect.Descriptor instead.
 func (*AskResponse) Descriptor() ([]byte, []int) {
-	return file_gpt_proto_rawDescGZIP(), []int{1}
+	return file_proto_gpt_proto_rawDescGZIP(), []int{1}
 }
 
 func (x *AskResponse) GetAnswer() string {
@@ -111,37 +112,37 @@ func (x *AskResponse) GetAnswer() string {
 	return ""
 }
 
-var File_gpt_proto protoreflect.FileDescriptor
+var File_proto_gpt_proto protoreflect.FileDescriptor
 
-const file_gpt_proto_rawDesc = "" +
+const file_proto_gpt_proto_rawDesc = "" +
 	"\n" +
-	"\tgpt.proto\x12\x03gpt\"(\n" +
+	"\x0fproto/gpt.proto\x12\x03gpt\x1a\x1cgoogle/api/annotations.proto\"(\n" +
 	"\n" +
 	"AskRequest\x12\x1a\n" +
 	"\bquestion\x18\x01 \x01(\tR\bquestion\"%\n" +
 	"\vAskResponse\x12\x16\n" +
-	"\x06answer\x18\x01 \x01(\tR\x06answer25\n" +
-	"\tQAService\x12(\n" +
-	"\x03Ask\x12\x0f.gpt.AskRequest\x1a\x10.gpt.AskResponseB\rZ\vpkg/gen/gptb\x06proto3"
+	"\x06answer\x18\x01 \x01(\tR\x06answer2F\n" +
+	"\tQAService\x129\n" +
+	"\x03Ask\x12\x0f.gpt.AskRequest\x1a\x10.gpt.AskResponse\"\x0f\x82\xd3\xe4\x93\x02\t:\x01*\"\x04/askB\rZ\vpkg/gen/gptb\x06proto3"
 
 var (
-	file_gpt_proto_rawDescOnce sync.Once
-	file_gpt_proto_rawDescData []byte
+	file_proto_gpt_proto_rawDescOnce sync.Once
+	file_proto_gpt_proto_rawDescData []byte
 )
 
-func file_gpt_proto_rawDescGZIP() []byte {
-	file_gpt_proto_rawDescOnce.Do(func() {
-		file_gpt_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_gpt_proto_rawDesc), len(file_gpt_proto_rawDesc)))
+func file_proto_gpt_proto_rawDescGZIP() []byte {
+	file_proto_gpt_proto_rawDescOnce.Do(func() {
+		file_proto_gpt_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_proto_gpt_proto_rawDesc), len(file_proto_gpt_proto_rawDesc)))
 	})
-	return file_gpt_proto_rawDescData
+	return file_proto_gpt_proto_rawDescData
 }
 
-var file_gpt_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
-var file_gpt_proto_goTypes = []any{
+var file_proto_gpt_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
+var file_proto_gpt_proto_goTypes = []any{
 	(*AskRequest)(nil),  // 0: gpt.AskRequest
 	(*AskResponse)(nil), // 1: gpt.AskResponse
 }
-var file_gpt_proto_depIdxs = []int32{
+var file_proto_gpt_proto_depIdxs = []int32{
 	0, // 0: gpt.QAService.Ask:input_type -> gpt.AskRequest
 	1, // 1: gpt.QAService.Ask:output_type -> gpt.AskResponse
 	1, // [1:2] is the sub-list for method output_type
@@ -151,26 +152,26 @@ var file_gpt_proto_depIdxs = []int32{
 	0, // [0:0] is the sub-list for field type_name
 }
 
-func init() { file_gpt_proto_init() }
-func file_gpt_proto_init() {
-	if File_gpt_proto != nil {
+func init() { file_proto_gpt_proto_init() }
+func file_proto_gpt_proto_init() {
+	if File_proto_gpt_proto != nil {
 		return
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
-			RawDescriptor: unsafe.Slice(unsafe.StringData(file_gpt_proto_rawDesc), len(file_gpt_proto_rawDesc)),
+			RawDescriptor: unsafe.Slice(unsafe.StringData(file_proto_gpt_proto_rawDesc), len(file_proto_gpt_proto_rawDesc)),
 			NumEnums:      0,
 			NumMessages:   2,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
-		GoTypes:           file_gpt_proto_goTypes,
-		DependencyIndexes: file_gpt_proto_depIdxs,
-		MessageInfos:      file_gpt_proto_msgTypes,
+		GoTypes:           file_proto_gpt_proto_goTypes,
+		DependencyIndexes: file_proto_gpt_proto_depIdxs,
+		MessageInfos:      file_proto_gpt_proto_msgTypes,
 	}.Build()
-	File_gpt_proto = out.File
-	file_gpt_proto_goTypes = nil
-	file_gpt_proto_depIdxs = nil
+	File_proto_gpt_proto = out.File
+	file_proto_gpt_proto_goTypes = nil
+	file_proto_gpt_proto_depIdxs = nil
 }

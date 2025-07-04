@@ -4,13 +4,13 @@ WORKDIR /app
 
 COPY go.mod ./
 COPY pkg/go.mod ./pkg/
-COPY apps/gptAnswer/go.mod ./apps/gptAnswer/
+COPY apps/gpt-service/go.mod ./apps/gpt-service/
 
 RUN go mod download
 
 COPY . .
 
-WORKDIR /app/apps/gptAnswer
+WORKDIR /app/apps/gpt-service
 RUN go build -o /app/gpt-service ./cmd/main.go
 
 FROM alpine:latest
